@@ -19,6 +19,10 @@ public class ArrayCopyTask extends RecursiveAction {
     private final int[] src, dst;
     private final int lo, hi;
 
+    public static void sequential() {
+        throw new NotYetImplementedException();
+    }
+
     public ArrayCopyTask(int[] src, int[] dst, int lo, int hi) {
         throw new NotYetImplementedException();
     }

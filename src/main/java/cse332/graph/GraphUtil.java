@@ -1,6 +1,8 @@
 package cse332.graph;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class GraphUtil {
 
@@ -37,28 +39,28 @@ public class GraphUtil {
     }
 
     /**
-     * Find the cycle given the predecessor array
+     * Find if a cycle exists given the predecessor array
      * @param prev predecessor array
      * @return cycle, as a list, or empty list if there is no cycle
      */
     public static List<Integer> getCycle(int[] prev) {
         int n = prev.length;
-        int[] vis = new int[n];
+        int[] visited = new int[n];
         for (int i = 0; i < n; i++) {
-            if (vis[i] < 0) continue;
+            if (visited[i] < 0) continue;
             int j = i;
-            while (prev[j] >= 0 && vis[j] == 0) {
-                vis[j] = ~i;
+            while (prev[j] >= 0 && visited[j] == 0) {
+                visited[j] = ~i;
                 j = prev[j];
             }
-            if (vis[j] != ~i) continue;
-            LinkedList<Integer> ll = new LinkedList<>();
+            if (visited[j] != ~i) continue;
+            LinkedList<Integer> cycleList = new LinkedList<>();
             int u = j;
             do {
-                ll.addFirst(u);
+                cycleList.addFirst(u);
                 u = prev[u];
             } while (u != j);
-            return ll;
+            return cycleList;
         }
         return new LinkedList<>();
     }

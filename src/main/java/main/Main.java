@@ -1,7 +1,7 @@
 package main;
 
-import cse332.interfaces.BellmanFordSolver;
 import cse332.graph.GraphUtil;
+import cse332.interfaces.BellmanFordSolver;
 import solvers.OutSequential;
 
 public class Main {
