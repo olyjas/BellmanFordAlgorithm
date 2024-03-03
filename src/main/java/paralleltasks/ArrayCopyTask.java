@@ -19,16 +19,30 @@ public class ArrayCopyTask extends RecursiveAction {
     private final int[] src, dst;
     private final int lo, hi;
 
-    public static void sequential() {
-        throw new NotYetImplementedException();
+    public static void sequential(int lo, int hi, int[] src, int[] dst) {
+        for (int i = lo; i < hi; i++) {
+            dst[i] = src[i];
+        }
     }
 
     public ArrayCopyTask(int[] src, int[] dst, int lo, int hi) {
-        throw new NotYetImplementedException();
+        this.src = src;
+        this.dst = dst;
+        this.lo = lo;
+        this.hi = hi;
     }
 
     @SuppressWarnings("ManualArrayCopy")
     protected void compute() {
-        throw new NotYetImplementedException();
+        if (hi - lo <= CUTOFF) {
+            sequential(lo, hi, src, dst);
+        } else {
+            int mid = lo + (hi-lo)/2;
+            ArrayCopyTask left = new ArrayCopyTask(src, dst, lo, mid);
+            ArrayCopyTask right = new ArrayCopyTask(src, dst, mid, hi);
+            left.fork();
+            right.compute();
+            left.join();
+        }
     }
 }
