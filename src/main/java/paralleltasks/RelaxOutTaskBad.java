@@ -44,13 +44,13 @@ public class RelaxOutTaskBad extends RecursiveAction {
     }
 
     public static void sequential(int lo, int hi, int[] dist, int[] pred, int[] currDist, List<Map<Integer, Integer>> g) {
-        for (int v = lo; v < hi; v++) {
-            for (Map.Entry<Integer, Integer> edge : g.get(v).entrySet()) {
+        for (int i = lo; i < hi; i++) {
+            for (Map.Entry<Integer, Integer> edge : g.get(i).entrySet()) {
                 int vertex = edge.getKey();
                 int weight = edge.getValue();
-                if (currDist[v] != GraphUtil.INF && currDist[v] + weight < dist[vertex]) {
-                    dist[vertex] = currDist[v] + weight;
-                    pred[vertex] = v;
+                if (currDist[i] != GraphUtil.INF && currDist[i] + weight < dist[vertex]) {
+                    dist[vertex] = currDist[i] + weight;
+                    pred[vertex] = i;
                 }
             }
         }
